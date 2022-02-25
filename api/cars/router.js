@@ -4,25 +4,37 @@ const UsedCars = require("./model");
 
 router.post("/", middleware.validateCarData, (req, res, next) => {
   UsedCars.add(req.carData)
-    .then((project) => res.status(201).json(project))
+    .then((car) => res.status(201).json(car))
     .catch(next);
 });
 
 router.get("/", (req, res, next) => {
   UsedCars.getAll()
-    .then((projects) => res.status(200).json(projects ? projects : []))
+    .then((cars) => res.status(200).json(cars ? cars : []))
     .catch(next);
 });
 
 router.get("/:id", (req, res, next) => {
-  UsedCars.get(req.carId)
-    .then((projects) => res.status(200).json(projects ? projects : []))
+  UsedCars.get(req.params.id)
+    .then((car) =>
+      car
+        ? res.status(200).json(car)
+        : res
+            .status(404)
+            .json({ message: `car with ID ${req.params.id} was not found` })
+    )
     .catch(next);
 });
 
 router.delete("/:id", (req, res, next) => {
-  UsedCars.getAll()
-    .then((projects) => res.status(200).json(projects ? projects : []))
+  UsedCars.remove(req.params.id)
+    .then((car) =>
+      car
+        ? res.status(200).json(car)
+        : res
+            .status(404)
+            .json({ message: `car with ID ${req.params.id} was not found` })
+    )
     .catch(next);
 });
 
