@@ -1,4 +1,4 @@
-const db = require("../data/db-config");
+const db = require("../../data/db-config");
 
 async function getAll() {
   return await db("used_cars");

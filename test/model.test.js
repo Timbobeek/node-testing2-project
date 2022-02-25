@@ -1,5 +1,5 @@
 const db = require("../data/db-config.js");
-const UsedCars = require("../api/model");
+const UsedCars = require("../api/cars/model");
 
 afterAll(async () => {
   await db.destroy()
