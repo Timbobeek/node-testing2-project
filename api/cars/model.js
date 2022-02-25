@@ -14,7 +14,7 @@ async function add(carData) {
 }
 
 async function remove(carId) {
-  const car = await db("used_cars").where({ car_id: id }).first();
+  const car = await db("used_cars").where({ car_id: carId }).first();
   await db("used_cars").where({ car_id: carId }).del();
   return car;
 }
